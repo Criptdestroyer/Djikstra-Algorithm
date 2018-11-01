@@ -79,7 +79,7 @@ public class Dijkstra {
 
     public void PrintPath(int x) {
         if ((pred.get(x) == -1) && (x != s)) {
-            System.out.println("tidak ada jalan");
+            System.out.println("there is no way");
         } else if (pred.get(x) != -1) {
             PrintPath(pred.get(x));
             System.out.println(pred.get(x) + " to " + x);

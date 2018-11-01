@@ -5,7 +5,6 @@
  */
 package Dijkstra;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -24,23 +23,44 @@ public class Place {
     public void generateMaps(){
         Random rand = new Random();
         namePlace[rand.nextInt(8)+0] = "Istana Negara";
-        namePlace[rand.nextInt(8)+0] = "Vanding Machine";
-        namePlace[rand.nextInt(8)+0] = "Money Changer";
+        namePlace[rand.nextInt(8)+0] = "Vanding Machine 1";
+        namePlace[rand.nextInt(8)+0] = "Vanding Machine 2";
+        namePlace[rand.nextInt(8)+0] = "Money Changer 1";
+        namePlace[rand.nextInt(8)+0] = "Money Changer 2";
         myPosition = rand.nextInt(8)+0;
     }
-    public int getMoneyChanger(){
+   
+    public int getMoneyChanger1(){
         int temp = -1;
         for (int i = 0; i < namePlace.length; i++) {
-            if(namePlace[i].compareTo("Money Changer")==0){
+            if(namePlace[i].compareTo("Money Changer 1")==0){
                 temp = i;
             }
         }
         return temp;
     }
-    public int getVandingMachine(){
+    public int getMoneyChanger2(){
         int temp = -1;
         for (int i = 0; i < namePlace.length; i++) {
-            if(namePlace[i].compareTo("Vanding Machine")==0){
+            if(namePlace[i].compareTo("Money Changer 2")==0){
+                temp = i;
+            }
+        }
+        return temp;
+    }
+    public int getVandingMachine1(){
+        int temp = -1;
+        for (int i = 0; i < namePlace.length; i++) {
+            if(namePlace[i].compareTo("Vanding Machine 1")==0){
+                temp = i;
+            }
+        }
+        return temp;
+    }
+    public int getVandingMachine2(){
+        int temp = -1;
+        for (int i = 0; i < namePlace.length; i++) {
+            if(namePlace[i].compareTo("Vanding Machine 2")==0){
                 temp = i;
             }
         }
