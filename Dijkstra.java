@@ -6,7 +6,6 @@
 package Dijkstra;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 /**
  *
@@ -16,12 +15,12 @@ public class Dijkstra {
 
     private final int V;
     private int s;
-    private final Map Node;
+    private final int[][] Node;
     LinkedList<Integer> dist;
     LinkedList<Boolean> visited;
     LinkedList<Integer> pred;
 
-    public Dijkstra(int V, Map Node) {
+    public Dijkstra(int V, int[][] Node) {
         this.V = V;
         this.Node = Node;
         dist = new LinkedList<>();
@@ -54,20 +53,19 @@ public class Dijkstra {
             }
             visited.set(u, Boolean.TRUE);
 
-            for (int i = 0; i < 10; i++) {
-
-            }
-            Map temp = (Map) Node.get(u);
-            for (int i = 0; i < temp.size(); i++) {
-                int temp2 = (int) temp.get(u);
-                if (dist.get(i) > (dist.get(u) + temp2)) {
-                    dist.set(i, dist.get(u) + temp2);
-                    pred.set(i, u);
+            for (int i = 0; i < Node[u].length; i++) {
+                if (Node[u][i] != Integer.MAX_VALUE) {
+                    if (dist.get(i) > (dist.get(u) + Node[u][i])) {
+                        dist.set(i, dist.get(u)+Node[u][i]);
+                        pred.set(i, u);
+                    }
                 }
             }
+            
         }
         return dist;
     }
+    
 
     public boolean isInfinite(int isi) {
         return isi == Integer.MAX_VALUE;
@@ -80,11 +78,11 @@ public class Dijkstra {
     }
 
     public void PrintPath(int x) {
-        if ((pred.get(x)==-1)&&(x!=s)) {
+        if ((pred.get(x) == -1) && (x != s)) {
             System.out.println("tidak ada jalan");
-        }else if(pred.get(x)!=-1){
+        } else if (pred.get(x) != -1) {
             PrintPath(pred.get(x));
-            System.out.println(pred.get(x)+","+x);
+            System.out.println(pred.get(x) + " to " + x);
         }
     }
 }
