@@ -5,6 +5,7 @@
  */
 package Dijkstra;
 
+import java.util.Scanner;
 
 /**
  *
@@ -16,10 +17,11 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Graph n = new Graph(10,10);
-        n.addEdge(0,1, 4);
-        n.addEdge(0,7, 8);
-        n.addEdge(1,7, 11);
+        Scanner data = new Scanner(System.in);
+        Graph n = new Graph(10, 10);
+        n.addEdge(0, 1, 4);
+        n.addEdge(0, 7, 8);
+        n.addEdge(1, 7, 11);
         n.addEdge(1, 2, 8);
         n.addEdge(1, 0, 4);
         n.addEdge(2, 8, 2);
@@ -45,13 +47,34 @@ public class main {
         n.addEdge(8, 7, 7);
         n.addEdge(8, 6, 6);
         n.addEdge(8, 2, 2);
-        System.out.println("Node");
-        n.print();
-        System.out.println("");
-        System.out.println("Dijkstra");
+        
+        
+        System.out.println("================");
+        System.out.println("Welcome to E-maps");
+        System.out.println("================");
         Dijkstra dj = new Dijkstra(10, n.getMap());
-        dj.Dijkstra(0);
-        dj.PrintPath(4);
+        Place p = new Place(9);
+        p.generateMaps();
+
+        boolean go = true;
+        while (go) {
+            System.out.println("Location Info:");
+            System.out.println("- Istana Negara \t: " + p.getIstanaNegara());
+            System.out.println("- Money Changer \t: " + p.getMoneyChanger());
+            System.out.println("- Vanding Machine\t: " + p.getVandingMachine());
+            System.out.println("- Your Position \t: " + p.getMyPosition());
+            System.out.println("99 to stop");
+            System.out.println("");
+            System.out.print("input tujuan anda : ");
+            int tujuan = data.nextInt();
+            if (tujuan == 99) {
+                go = false;
+            }
+            dj.Dijkstra(p.getMyPosition());
+            dj.PrintPath(tujuan);
+            p.setMyPosition(tujuan);
+            System.out.println("");
+        }
     }
-    
+
 }

@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Dijkstra;
+
+import java.util.Arrays;
+import java.util.Random;
+
+/**
+ *
+ * @author alfath
+ */
+public class Place {
+    private String namePlace[];
+    private int myPosition;
+    public Place(int n){
+        namePlace = new String[n];
+        for (int i = 0; i < n; i++) {
+            namePlace[i] = "";
+        }
+    }
+    public void generateMaps(){
+        Random rand = new Random();
+        namePlace[rand.nextInt(8)+0] = "Istana Negara";
+        namePlace[rand.nextInt(8)+0] = "Vanding Machine";
+        namePlace[rand.nextInt(8)+0] = "Money Changer";
+        myPosition = rand.nextInt(8)+0;
+    }
+    public int getMoneyChanger(){
+        int temp = -1;
+        for (int i = 0; i < namePlace.length; i++) {
+            if(namePlace[i].compareTo("Money Changer")==0){
+                temp = i;
+            }
+        }
+        return temp;
+    }
+    public int getVandingMachine(){
+        int temp = -1;
+        for (int i = 0; i < namePlace.length; i++) {
+            if(namePlace[i].compareTo("Vanding Machine")==0){
+                temp = i;
+            }
+        }
+        return temp;
+    }
+    public int getIstanaNegara(){
+        int temp = -1;
+        for (int i = 0; i < namePlace.length; i++) {
+            if(namePlace[i].compareTo("Istana Negara")==0){
+                temp = i;
+            }
+        }
+        return temp;
+    }
+    public int getMyPosition(){
+        return myPosition;
+    }
+    public void setMyPosition(int index){
+        myPosition = index;
+    }
+    
+}
