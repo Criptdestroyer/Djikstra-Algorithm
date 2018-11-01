@@ -5,31 +5,47 @@
  */
 package Dijkstra;
 
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author alfath
  */
 public class Node {
-    LinkedList<LinkedList<Object>> List;
-    private int position;
-    public Node(){
-        List = new LinkedList<>();
-        position = 0;
+
+    private Map<Object, Map> graph;
+    private Map<Object, Integer> temp;
+    private int length;
+
+    public Map<Object, Map> getGraph() {
+        return graph;
     }
-    public void addEdge(Object start, Object end, int dist){
-        List.add(new LinkedList<>());
-        LinkedList temp = List.get(position);
-        temp.add(start);
-        temp.add(end);
-        temp.add(dist);
-        position++;
+
+    public Node() {
+        graph = new HashMap<>();
+        length = 0;
     }
-    public void print(){
-        for (int i = 0; i < List.size(); i++) {
-            LinkedList temp = List.get(i);
-            System.out.println(temp.get(0)+" => "+temp.get(1)+" ("+temp.get(2)+") ");
+
+    public void addEdge(Object start, Object end, int dist) {
+
+        if (graph.containsKey(start)) {
+            temp.put(end, dist);
+            graph.put(start, temp);
+        } else{
+            temp = new HashMap<>();
+            temp.put(end, dist);
+            graph.put(start, temp);
+            length++;
         }
+    }
+
+    public int getLength() {
+        return length;
+    }
+    
+
+    public void print() {
+        System.out.println(graph.toString());
     }
 }
