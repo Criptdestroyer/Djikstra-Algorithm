@@ -81,6 +81,7 @@ public class main {
             if (tujuan == 99) {
                 go = false;
             }
+            System.out.println("");
             dj.Dijkstra(p.getMyPosition());
             dj.PrintPath(tujuan);
             p.setMyPosition(tujuan);

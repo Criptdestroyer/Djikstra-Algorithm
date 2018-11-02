@@ -11,8 +11,7 @@ import java.util.LinkedList;
  *
  * @author alfath
  */
-public class Dijkstra {
-
+public class DijkstraHeap {
     private final int V;
     private int s;
     private final int[][] Node;
@@ -20,7 +19,7 @@ public class Dijkstra {
     LinkedList<Boolean> visited;
     LinkedList<Integer> pred;
 
-    public Dijkstra(int V, int[][] Node) {
+    public DijkstraHeap(int V, int[][] Node) {
         this.V = V;
         this.Node = Node;
         dist = new LinkedList<>();
