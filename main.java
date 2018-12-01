@@ -47,48 +47,44 @@ public class main {
         n.addEdge(8, 7, 7);
         n.addEdge(8, 6, 6);
         n.addEdge(8, 2, 2);
+        n.addEdge(9, 7, 5);
+        n.addEdge(7, 9, 5);
 
         System.out.println("===================================================");
         System.out.println("                 Welcome to E-maps");
         System.out.println("===================================================");
-        Dijkstra dj = new Dijkstra(10, n.getMap());
-        Place p = new Place(9);
-        p.generateMaps();
-
         boolean go = true;
-        System.out.println("Location Info:");
-        System.out.println("- Your Position \t: " + p.getMyPosition());
-        System.out.println("- Istana Negara \t: " + p.getIstanaNegara());
-        System.out.println("- Money Changer 1\t: " + p.getMoneyChanger1());
-        System.out.println("- Money Changer 2\t: " + p.getMoneyChanger2());
-        System.out.println("- Vanding Machine 1\t: " + p.getVandingMachine1());
-        System.out.println("- Vanding Machine 2\t: " + p.getVandingMachine2());
-        System.out.println("");
-
-        System.out.println("Menu");
-        System.out.println("1. Go to nearest vanding machine");
-        System.out.println("2. Go to nearest money changer");
-        System.out.println("3. Go to another place");
-        System.out.print("input number: ");
-        int menu = data.nextInt();
-        if (menu == 1) {
-
-        } else if (menu == 2) {
-
-        } else if (menu == 3) {
-            System.out.print("input your destination : ");
-            int tujuan = data.nextInt();
-            if (tujuan == 99) {
-                go = false;
+        while (go) {
+            Dijkstra dj = new Dijkstra(10, n.getMap());
+            System.out.println("Menu");
+            System.out.println("1. One Destination");
+            System.out.println("2. Many Destination");
+            System.out.println("0 to exit app");
+            System.out.print("input number: ");
+            int menu = data.nextInt();
+            switch (menu) {
+                case 1:
+                    System.out.print("input your current place : ");
+                    int asal = data.nextInt();
+                    System.out.print("input your destination : ");
+                    int tujuan = data.nextInt();
+                    System.out.println("");
+                    System.out.println("Shortest Path from "+asal+" to "+tujuan);
+                    dj.Dijkstra(asal);
+                    int jarak = dj.PrintPath(tujuan,0);
+                    System.out.println("Distance : "+jarak);
+                    System.out.println("");
+                    break;
+                case 2:
+                    break;
+                case 0:
+                    go = false;
+                    break;
+                default:
+                    System.out.println("wrong input");
+                    break;
             }
-            System.out.println("");
-            dj.Dijkstra(p.getMyPosition());
-            dj.PrintPath(tujuan);
-            p.setMyPosition(tujuan);
-            System.out.println("");
-        } else {
-            System.out.println("Wrong Input");
-        }
-        System.out.println("===================================================");
+            System.out.println("===================================================");
+        }    
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dijkstra;
 
 import java.util.LinkedList;
@@ -34,11 +29,7 @@ public class Dijkstra {
 
     public LinkedList Dijkstra(int s) {
         this.s = s;
-        fillArray(dist, Integer.MAX_VALUE);
-        fillArray(visited, false);
-        fillArray(pred, -1);
-        
-        
+        fillAllArray();
         dist.set(s, 0);
         while (true) {
             int u = -1;
@@ -57,16 +48,15 @@ public class Dijkstra {
             for (int i = 0; i < Node[u].length; i++) {
                 if (Node[u][i] != Integer.MAX_VALUE) {
                     if (dist.get(i) > (dist.get(u) + Node[u][i])) {
-                        dist.set(i, dist.get(u)+Node[u][i]);
+                        dist.set(i, dist.get(u) + Node[u][i]);
                         pred.set(i, u);
                     }
                 }
             }
-            
+
         }
         return dist;
     }
-    
 
     public boolean isInfinite(int isi) {
         return isi == Integer.MAX_VALUE;
@@ -78,12 +68,21 @@ public class Dijkstra {
         }
     }
 
-    public void PrintPath(int x) {
+    public void fillAllArray() {
+        fillArray(dist, Integer.MAX_VALUE);
+        fillArray(visited, false);
+        fillArray(pred, -1);
+    }
+
+    public int PrintPath(int x, int dist) {
         if ((pred.get(x) == -1) && (x != s)) {
             System.out.println("there is no way");
+            return -1;
         } else if (pred.get(x) != -1) {
-            PrintPath(pred.get(x));
-            System.out.println(pred.get(x) + " to " + x);
+            dist += this.dist.get(x);
+            PrintPath(pred.get(x), dist);
+            System.out.println(pred.get(x) + " to " + x +" ("+this.dist.get(x)+")");
         }
+        return dist;
     }
 }
