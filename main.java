@@ -69,13 +69,36 @@ public class main {
                     System.out.print("input your destination : ");
                     int tujuan = data.nextInt();
                     System.out.println("");
-                    System.out.println("Shortest Path from "+asal+" to "+tujuan);
+                    System.out.println("Shortest Path from " + asal + " to " + tujuan);
                     dj.Dijkstra(asal);
-                    int jarak = dj.PrintPath(tujuan,0);
-                    System.out.println("Distance : "+jarak);
+                    int jarak = dj.PrintPath(tujuan, 0);
+                    System.out.println("Distance : " + jarak);
                     System.out.println("");
                     break;
                 case 2:
+                    Queue pitstop = new Queue();
+                    System.out.print("input your current place : ");
+                    asal = data.nextInt();
+                    int stop;
+                    do {
+                        System.out.print("input your destination (0 to stop)): ");
+                        stop = data.nextInt();
+                        pitstop.enqueue(stop);
+                    } while (stop != 0);
+                    int total = 0;
+                    while (pitstop.getSize() != 0) {
+                        dj = new Dijkstra(10, n.getMap());
+                        tujuan = pitstop.dequeue();
+                        System.out.println("");
+                        System.out.println("Shortest Path from " + asal + " to " + tujuan);
+                        dj.Dijkstra(asal);
+                        jarak = dj.PrintPath(tujuan, 0);
+                        total += jarak;
+                        System.out.println("Distance : " + jarak);
+                        System.out.println("");
+                        asal = tujuan;
+                    }
+                    System.out.println("Total Distance : "+total);
                     break;
                 case 0:
                     go = false;
@@ -85,6 +108,6 @@ public class main {
                     break;
             }
             System.out.println("===================================================");
-        }    
+        }
     }
 }
