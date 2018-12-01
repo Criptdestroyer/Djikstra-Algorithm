@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dijkstra;
 
 import java.util.Scanner;
@@ -49,12 +44,27 @@ public class main {
         n.addEdge(8, 2, 2);
         n.addEdge(9, 7, 5);
         n.addEdge(7, 9, 5);
+        Hashtable place = new Hashtable(10);
+        place.putCol(0, "Universitas Sriwijaya");
+        place.putCol(1, "Upnormal Radial");
+        place.putCol(2, "Home");
+        place.putCol(3, "Transmart");
+        place.putCol(4, "McD");
+        place.putCol(5, "Palembang Square");
+        place.putCol(6, "Jakabaring");
+        place.putCol(7, "Ampera");
+        place.putCol(8, "Pusri");
+        place.putCol(9, "Kertapati");
 
         System.out.println("===================================================");
         System.out.println("                 Welcome to E-maps");
         System.out.println("===================================================");
         boolean go = true;
         while (go) {
+            System.out.println("info:");
+            for (int i = 0; i < place.getCAPACITY(); i++) {
+                System.out.println(i + " = " + place.get(i));
+            }
             Dijkstra dj = new Dijkstra(10, n.getMap());
             System.out.println("Menu");
             System.out.println("1. One Destination");
@@ -69,7 +79,7 @@ public class main {
                     System.out.print("input your destination : ");
                     int tujuan = data.nextInt();
                     System.out.println("");
-                    System.out.println("Shortest Path from " + asal + " to " + tujuan);
+                    System.out.println("Shortest Path from " + place.get(asal) + " to " + place.get(tujuan));
                     dj.Dijkstra(asal);
                     int jarak = dj.PrintPath(tujuan, 0);
                     System.out.println("Distance : " + jarak);
@@ -81,16 +91,18 @@ public class main {
                     asal = data.nextInt();
                     int stop;
                     do {
-                        System.out.print("input your destination (0 to stop)): ");
+                        System.out.print("input your destination (99 to stop)): ");
                         stop = data.nextInt();
-                        pitstop.enqueue(stop);
-                    } while (stop != 0);
+                        if (stop != 99) {
+                            pitstop.enqueue(stop);
+                        }
+                    } while (stop != 99);
                     int total = 0;
                     while (pitstop.getSize() != 0) {
                         dj = new Dijkstra(10, n.getMap());
                         tujuan = pitstop.dequeue();
                         System.out.println("");
-                        System.out.println("Shortest Path from " + asal + " to " + tujuan);
+                        System.out.println("Shortest Path from " + place.get(asal) + " to " + place.get(tujuan));
                         dj.Dijkstra(asal);
                         jarak = dj.PrintPath(tujuan, 0);
                         total += jarak;
@@ -98,7 +110,7 @@ public class main {
                         System.out.println("");
                         asal = tujuan;
                     }
-                    System.out.println("Total Distance : "+total);
+                    System.out.println("Total Distance : " + total);
                     break;
                 case 0:
                     go = false;
